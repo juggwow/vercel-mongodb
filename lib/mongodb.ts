@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'development') {
 
 async function timeCollection(){
   const timeCollection = new MongoClient(uri, options).db("connection").collection("time")
-  await timeCollection.insertOne({ connectTime: new Date(), from: "Vercel 2" })
+  await timeCollection.insertOne({ connectTime: new Date().toLocaleDateString(), from: "Vercel 3" })
 }
 
 timeCollection()
