@@ -1,3 +1,5 @@
+import { time } from 'console'
+import exp from 'constants'
 import { MongoClient } from 'mongodb'
 
 if (!process.env.MONGODB_URI) {
@@ -26,7 +28,15 @@ if (process.env.NODE_ENV === 'development') {
   // In production mode, it's best to not use a global variable.
   client = new MongoClient(uri, options)
   clientPromise = client.connect()
+  
 }
+
+async function timeCollection(){
+  const timeCollection = new MongoClient(uri, options).db("connection").collection("time")
+  await timeCollection.insertOne({ connectTime: new Date(), from: "Vercel 2" })
+}
+
+timeCollection()
 
 // Export a module-scoped MongoClient promise. By doing this in a
 // separate module, the client can be shared across functions.
